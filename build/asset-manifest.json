@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/static/css/main.d2956df0.chunk.css",
+    "main.js": "/static/js/main.e7703993.chunk.js",
+    "main.js.map": "/static/js/main.e7703993.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.116537ff.js",
+    "runtime-main.js.map": "/static/js/runtime-main.116537ff.js.map",
+    "static/js/2.cc6e7689.chunk.js": "/static/js/2.cc6e7689.chunk.js",
+    "static/js/2.cc6e7689.chunk.js.map": "/static/js/2.cc6e7689.chunk.js.map",
+    "static/js/3.70b35cc4.chunk.js": "/static/js/3.70b35cc4.chunk.js",
+    "static/js/3.70b35cc4.chunk.js.map": "/static/js/3.70b35cc4.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.d2956df0.chunk.css.map": "/static/css/main.d2956df0.chunk.css.map",
+    "static/js/2.cc6e7689.chunk.js.LICENSE.txt": "/static/js/2.cc6e7689.chunk.js.LICENSE.txt",
+    "static/media/Cancelled.6ee0a9cf.svg": "/static/media/Cancelled.6ee0a9cf.svg",
+    "static/media/Checkmark.ac843801.svg": "/static/media/Checkmark.ac843801.svg",
+    "static/media/Checkmark.c5747f71.svg": "/static/media/Checkmark.c5747f71.svg",
+    "static/media/Close.832478c8.svg": "/static/media/Close.832478c8.svg",
+    "static/media/Info.9982a4f0.svg": "/static/media/Info.9982a4f0.svg",
+    "static/media/App.scss": "/static/media/Search.744e842b.svg",
+    "static/media/Warning.4c02ecd0.svg": "/static/media/Warning.4c02ecd0.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.116537ff.js",
+    "static/js/2.cc6e7689.chunk.js",
+    "static/css/main.d2956df0.chunk.css",
+    "static/js/main.e7703993.chunk.js"
+  ]
+}
