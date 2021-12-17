@@ -1,8 +1,8 @@
 import React, {useState} from "react";
 
-const Toggle = ({labelOne, labelTwo, labelInternal, checked}) => {
+const Toggle = ({labelOne, labelTwo, labelInternal, checked, onClick}) => {
 
-  const [isChecked, setIsChecked] = useState(checked);
+  const [isChecked, setIsChecked] = useState((checked) ? true : false);
 
   let classList = (labelOne && labelTwo ) ? 'toggle has-label': 'toggle no-label';
   classList += (labelInternal) ? ' internal': ' external';
@@ -10,6 +10,7 @@ const Toggle = ({labelOne, labelTwo, labelInternal, checked}) => {
 
   const handleChange = () => {
     setIsChecked(!isChecked);
+    onClick();
   }
 
   return (

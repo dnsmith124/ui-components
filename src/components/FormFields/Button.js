@@ -1,9 +1,11 @@
 import React, {useState} from "react";
 
-const Button = ({isSecondary, handleClick, href, iconOnly, _blank, children}) => {
+const Button = ({isSecondary, handleClick, href, iconOnly, _blank, type, children}) => {
 
   let buttonStyle = (isSecondary) ? 'secondary' : 'primary';
   buttonStyle += (iconOnly) ? ' icon-only': '';
+
+  type = (type) ? type : '';
 
   const [clicked, setClicked] = useState(false);
   
@@ -21,7 +23,7 @@ const Button = ({isSecondary, handleClick, href, iconOnly, _blank, children}) =>
         </a>
       }
       {!href && 
-        <button className={`button ${buttonStyle} ${clicked && 'clicked'}`} onClick={handleClick}>
+        <button className={`button ${buttonStyle} ${clicked && 'clicked'}`} type={type} onClick={handleClick}>
           {children}
         </button>
       }

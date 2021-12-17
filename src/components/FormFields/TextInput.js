@@ -1,8 +1,10 @@
 import React from "react";
 
-const TextInput = ({label, subtitle, placeholder, size, rows}) => {
+const TextInput = ({label, subtitle, placeholder, size, rows, handleChange}) => {
   
   size = (size === undefined) ? 's' : size;
+
+  handleChange = (handleChange) ? handleChange : () => {};
 
   return (
     <> 
@@ -11,7 +13,7 @@ const TextInput = ({label, subtitle, placeholder, size, rows}) => {
       <label className={`text-input ${size}`}> 
         {label && <span className="label">{label}</span>}
         {subtitle && <span className="subtitle">{subtitle}</span>}
-        <textarea type="text" placeholder={placeholder} rows={rows} />
+        <textarea type="text" placeholder={placeholder} rows={rows} onChange={(e) => {handleChange(e.target.value)}}/>
       </label>
     }
     {
@@ -19,7 +21,7 @@ const TextInput = ({label, subtitle, placeholder, size, rows}) => {
       <label className={`text-input ${size}`}> 
         {label && <span className="label">{label}</span>}
         {subtitle && <span className="subtitle">{subtitle}</span>}
-        <input type="text" placeholder={placeholder} size="1" />
+        <input type="text" placeholder={placeholder} size="1" onChange={(e) => {handleChange(e.target.value)}}/>
       </label>
     }
     </>

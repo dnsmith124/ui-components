@@ -106,7 +106,10 @@
   padding-left: 0;
   margin: 0 auto;
   .tab-list {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat( auto-fit, minmax(175px, 1fr));
+    grid-gap: 30px 10px;
+    padding-bottom: 30px;
     .tab-list-item {
       padding: 0.5rem 0.75rem;
       margin: 0 $s -1px $s;
@@ -379,6 +382,7 @@ label.checkbox {
   display: inline-grid;
   grid-template-columns: minmax(0,1fr);
   margin: 0 2% $s 0;
+
   &.s {
     width: 23%;
   }
@@ -394,8 +398,9 @@ label.checkbox {
 .text-input {
   .label {
     font-size: $subTwoSize;
-    margin-bottom: $xxs;
+    margin-bottom: $xs;
     font-weight: 700;
+    color: $darkGrey;
   }
   .subtitle {
     font-size: $bodyTwoSize;
@@ -419,21 +424,23 @@ label.checkbox {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
+    cursor: pointer;
     &:focus, &:focus-visible {
       outline: none;
     }
   }
   .label {
     font-size: $subTwoSize;
-    margin-bottom: $xxs;
+    margin-bottom: $xs;
     font-weight: 700;
+    color: $darkGrey;
   }
   .subtitle {
     font-size: $bodyTwoSize;
     margin-bottom: $xxs;
   }
   .select-container {
-    padding: 10px $xs;
+    padding: 7px $xs;
     border-radius: $defaultBorderRadius;
     border: 1px solid $black;
     color: $darkGrey;
@@ -449,6 +456,7 @@ label.checkbox {
       transform: rotate(360deg);
       width: 24px;
       height: 24px;
+      cursor: pointer;
     }
     &.open {
       .icon {
@@ -590,12 +598,18 @@ label.checkbox {
     }
     &.warning {
       border-color: $yellow;
-      svg, svg path {
-        fill: $yellow;
-        stroke: $white;
-      }
-      svg circle {
-        stroke: $yellow;
+      svg {
+        path {
+          fill: $white;
+          stroke: $white;
+          &:nth-of-type(2) {
+            fill: $yellow;
+          }
+        }
+        circle {
+          stroke: $yellow;
+          fill: $yellow;
+        }
       }
       h1,h2,h3,h4,.h1,.h2,.h3,.h4 {
         color: $yellow;
@@ -649,6 +663,60 @@ label.checkbox {
     &.bottom {
       bottom: 5vh;
       top: unset;
+    }
+  }
+}
+
+
+// Query Window
+.query-window {
+  box-shadow: $dropShadowHover;
+  padding: 24px;
+  border-radius: $defaultBorderRadius;
+  margin-bottom: $m;
+  svg, svg path, svg circle {
+    stroke: $black;
+    margin-right: 0;
+  }
+  svg circle {
+    fill: transparent;
+  }
+  &.new {
+
+  }
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .heading {
+      width: 100%;
+      margin: 0;
+      line-height: 1;
+    }
+    .buttons {
+      display: flex;
+      align-items: center;
+      button {
+        background-color: transparent;
+        margin: 0;
+        padding: 0;
+        &:hover {
+          box-shadow: none;
+        }
+      }
+      .open-toggle {
+        transition: $defaultTransformAnim;
+      }
+    }
+  }
+  &.open {
+    .header {
+      margin-bottom: $m;
+    }
+    .buttons {
+      .open-toggle {
+        transform: rotate(180deg);
+      }
     }
   }
 }

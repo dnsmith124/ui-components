@@ -1,5 +1,5 @@
 import './App.scss';
-import React from "react";
+import React, {useState, useEffect} from "react";
 import Tabs from './components/Tabs/Tabs';
 import Tab from './components/Tabs/Tab';
 import Circle from './components/Misc/Circle';
@@ -13,17 +13,32 @@ import Search from './components/Search/Search';
 import Alert from './components/Alert/Alert';
 import {ReactComponent as Checkmark} from './Icons/Buttons/Checkmark.svg'
 import {Fade} from 'react-awesome-reveal';
+import Query from './components/Query/Query';
 
 function App() {
+
+  const [numQueries, setNumQueries] = useState(1);
+
+  const handleAddQuery = () => {
+    setNumQueries(numQueries + 1);
+  }
+  
+  const handleRemoveQuery = () => {
+    setNumQueries(numQueries - 1);
+  }
+  
+  useEffect(() => {
+    console.log(numQueries);
+  }, [numQueries])
 
   return (
   <div className="App">
     <header className="App-header">
       <Fade>
-    <h1>
-      Translator UI Components
-    </h1>
-        </Fade> 
+        <h1>
+          Translator UI Components
+        </h1>
+      </Fade> 
     </header>
     <div className="container">
     <Tabs>
@@ -296,6 +311,15 @@ function App() {
             <p className="body-two">Message Details</p>
           </Alert>
         </div>
+      </Tab>
+      <Tab heading="Query Window">
+        { 
+          [...Array(numQueries)].map((_, i) => {
+            return <Query key={i} open handleAdd={handleAddQuery} handleRemove={handleRemoveQuery} />
+          }) 
+        }
+        <Query newQuery handleAdd={handleAddQuery} handleRemove={handleRemoveQuery} />
+
       </Tab>
     </Tabs>
     </div>
