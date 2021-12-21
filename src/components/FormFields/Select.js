@@ -1,16 +1,17 @@
 import React, {useState, useEffect} from "react";
 import AnimateHeight from "react-animate-height";
 
-const Select = ({label, subtitle, name, size, handleChange, children}) => {
+const Select = ({label, subtitle, name, size, error, errorText, handleChange, children}) => {
 
   const [selectedItem, setSelectedItem] = useState(undefined);
   const [selectOpen, setSelectOpen] = useState(false);
   const [height, setHeight] = useState(0);
   let openClass = (selectOpen) ? 'open' : 'closed';
 
-  size = (size === undefined) ? 's' : size;
+  size = (size) ? size : 's';
 
   handleChange = (handleChange) ? handleChange : () => {};
+  errorText = (errorText) ? errorText : "Error Message";
 
   const handleSelectClick = (e) => {
     e.preventDefault();
@@ -57,6 +58,7 @@ const Select = ({label, subtitle, name, size, handleChange, children}) => {
             }
           </AnimateHeight>
         </div>
+        {error && <span className="error-text">{errorText}</span>}
       </label>
     </>
   );

@@ -378,7 +378,7 @@ label.checkbox {
 }
 
 // Form Input Sizes
-.text-input, .select, .search-container {
+.text-input, .select, .search-container, .button {
   display: inline-grid;
   grid-template-columns: minmax(0,1fr);
   margin: 0 2% $s 0;
@@ -391,6 +391,18 @@ label.checkbox {
   }
   &.l {
     width: 98%;
+  }
+  .error-text {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: $red;
+    margin-top: 8px;
+    font-size: $captionSize;
+    &:before {
+      content: url('../Icons/Alerts/Info.svg');
+      margin-right: 4px;
+    }
   }
 }
 

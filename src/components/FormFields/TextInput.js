@@ -1,10 +1,11 @@
 import React from "react";
 
-const TextInput = ({label, subtitle, placeholder, size, rows, handleChange}) => {
+const TextInput = ({label, subtitle, placeholder, size, rows, error, errorText, handleChange}) => {
   
   size = (size === undefined) ? 's' : size;
 
   handleChange = (handleChange) ? handleChange : () => {};
+  errorText = (errorText) ? errorText : "Error Message";
 
   return (
     <> 
@@ -14,6 +15,7 @@ const TextInput = ({label, subtitle, placeholder, size, rows, handleChange}) => 
         {label && <span className="label">{label}</span>}
         {subtitle && <span className="subtitle">{subtitle}</span>}
         <textarea type="text" placeholder={placeholder} rows={rows} onChange={(e) => {handleChange(e.target.value)}}/>
+        {error && <span className="error-text">{errorText}</span>}
       </label>
     }
     {
@@ -22,6 +24,7 @@ const TextInput = ({label, subtitle, placeholder, size, rows, handleChange}) => 
         {label && <span className="label">{label}</span>}
         {subtitle && <span className="subtitle">{subtitle}</span>}
         <input type="text" placeholder={placeholder} size="1" onChange={(e) => {handleChange(e.target.value)}}/>
+        {error && <span className="error-text">{errorText}</span>}
       </label>
     }
     </>

@@ -20,9 +20,21 @@ const Query = ({newQuery, handleAdd, handleRemove}) => {
   const [isNewQuery, setIsNewQuery] = useState(newQuery);
   const [height, setHeight] = useState(0);
   const [queryOpen, setQueryOpen] = useState(true);
+  const [isValidSubmission, setIsValidSubmission] = useState(false);
   // Remove after testing, use other state
   const [fields, setFields] = useState({}); // Initial object state established below in useEffect
   // const [fieldsNeedRefresh, setFieldsNeedRefresh] = useState(true);
+
+  const [subjectOneError, setSubjectOneError] = useState(false);
+  const subjectOneErrorText = "Please select a subject";
+  const [curieOneError, setCurieOneError] = useState(false);
+  const curieOneErrorText = "Please enter a valid CURIE";
+  const [predicateError, setPredicateError] = useState(false);
+  const predicateErrorText = "Please select a predicate";
+  const [subjectTwoError, setSubjectTwoError] = useState(false);
+  const subjectTwoErrorText = "Please select a subject";
+  const [curieTwoError, setCurieTwoError] = useState(false);
+  const curieTwoErrorText = "Please enter a valid CURIE";
 
   var queryOpenClass = (queryOpen) ? 'open' : 'closed';
 
@@ -30,7 +42,7 @@ const Query = ({newQuery, handleAdd, handleRemove}) => {
   handleRemove = (handleRemove) ? handleRemove : () => {}
 
   const handleChange = (e) => {
-
+    console.log(e);
   }
 
   const handleSubmission = (e) => {
@@ -40,7 +52,35 @@ const Query = ({newQuery, handleAdd, handleRemove}) => {
   }
 
   const validateSubmission = (e) => {
+    if(!fields.subjectOne) {
+      setSubjectOneError(true);
+    } else {
+      setSubjectOneError(false);
+    }
 
+    if(!fields.predicate) {
+      setPredicateError(true);
+    } else {
+      setPredicateError(false);
+    }
+
+    if(!fields.subjectTwo) {
+      setSubjectTwoError(true);
+    } else {
+      setSubjectTwoError(false);
+    }
+
+    if(!fields.curieOne.includes(":")) {
+      setCurieOneError(true);
+    } else {
+      setCurieOneError(false);
+    }
+
+    if(!fields.curieTwo.includes(":")) {
+      setCurieTwoError(true);
+    } else {
+      setCurieTwoError(false);
+    }
   }
 
   useEffect(() => {
@@ -55,8 +95,10 @@ const Query = ({newQuery, handleAdd, handleRemove}) => {
   }, [currentSubjectOne, currentCurieOne, currentPredicate, currentSubjectTwo, currentCurieTwo])
 
   useEffect(() => {
-    console.log(fields);
-  }, [fields])
+    if(!newQuery) {
+      console.log(fields);
+    }
+  }, [fields, newQuery])
 
   useEffect(() => {
     if(queryOpen === false)
@@ -86,78 +128,89 @@ const Query = ({newQuery, handleAdd, handleRemove}) => {
               }
               </span>
           </div>
-          <AnimateHeight className={``}
+          <AnimateHeight 
+            className={``}
             duration={250}
             height={height}
           >
-          {!proMode &&  
-            <form onSubmit={handleSubmission}>
-              <Select 
-                label="Subject" 
-                size="m" 
-                handleChange={(value)=>{
-                  setCurrentSubjectOne(value);
-                  handleChange(value);
-                }}
-              >
-                <option value="Chemical" key="0">Chemical</option>
-                <option value="Subject2" key="1">Subject2</option>
-                <option value="Subject3" key="2">Subject3</option>
-              </Select>
-              <TextInput 
-                label="CURIE" 
-                size="m" 
-                placeholder="" 
-                handleChange={(value)=>{
-                  setCurrentCurieOne(value);
-                  handleChange(value);
-                }}
-              />
-              <Select 
-                label="Predicate" 
-                size="l" 
-                handleChange={(value)=>{
-                  setCurrentPredicate(value);
-                  handleChange(value);
-                }}
-              >
-                <option value="Predicate1" key="0">Predicate1</option>
-                <option value="Predicate2" key="1">Predicate2</option>
-                <option value="Predicate3" key="2">Predicate3</option>
-              </Select>
-              <Select 
-                label="Subject" 
-                size="m" 
-                handleChange={(value)=>{
-                  setCurrentSubjectTwo(value);
-                  handleChange(value);
-                }}
-              >
-                <option value="Gene" key="0">Gene</option>
-                <option value="Protein" key="1">Protein</option>
-                <option value="Subject3" key="2">Subject3</option>
-              </Select>
-              <TextInput 
-                label="CURIE" 
-                size="m" 
-                placeholder="" 
-                handleChange={(value)=>{
-                  setCurrentCurieTwo(value);
-                  handleChange(value);
-                }}
-              />
-              <div className="form-footer">
-                <Button type="submit">Submit Query</Button>
-              </div>
-            </form>
-          }
-          {proMode &&  
-            <>
-            <h2>Pro Mode Interface TBD</h2>
-            </>
-          }
-          
-          <Toggle labelInternal={false} labelOne="Lite" labelTwo="Pro" checked onClick={()=>{setProMode(!proMode)}} />
+            {!proMode &&  
+              <form onSubmit={handleSubmission}>
+                <Select 
+                  label="Subject" 
+                  size="m" 
+                  handleChange={(value)=>{
+                    setCurrentSubjectOne(value);
+                    handleChange(value);
+                  }}
+                  error={subjectOneError}
+                  errorText={subjectOneErrorText}
+                >
+                  <option value="Chemical" key="0">Chemical</option>
+                  <option value="Subject2" key="1">Subject2</option>
+                  <option value="Subject3" key="2">Subject3</option>
+                </Select>
+                <TextInput 
+                  label="CURIE" 
+                  size="m" 
+                  placeholder="" 
+                  handleChange={(value)=>{
+                    setCurrentCurieOne(value);
+                    handleChange(value);
+                  }}
+                  error={curieOneError}
+                  errorText={curieOneErrorText}
+                />
+                <Select 
+                  label="Predicate" 
+                  size="l" 
+                  handleChange={(value)=>{
+                    setCurrentPredicate(value);
+                    handleChange(value);
+                  }}
+                  error={predicateError}
+                  errorText={predicateErrorText}
+                >
+                  <option value="Predicate1" key="0">Predicate1</option>
+                  <option value="Predicate2" key="1">Predicate2</option>
+                  <option value="Predicate3" key="2">Predicate3</option>
+                </Select>
+                <Select 
+                  label="Subject" 
+                  size="m" 
+                  handleChange={(value)=>{
+                    setCurrentSubjectTwo(value);
+                    handleChange(value);
+                  }}
+                  error={subjectTwoError}
+                  errorText={subjectTwoErrorText}
+                >
+                  <option value="Gene" key="0">Gene</option>
+                  <option value="Protein" key="1">Protein</option>
+                  <option value="Subject3" key="2">Subject3</option>
+                </Select>
+                <TextInput 
+                  label="CURIE" 
+                  size="m" 
+                  placeholder="" 
+                  handleChange={(value)=>{
+                    setCurrentCurieTwo(value);
+                    handleChange(value);
+                  }}
+                  error={curieTwoError}
+                  errorText={curieTwoErrorText}
+                />
+                <div className="form-footer">
+                  <Button type="submit" size="m">Submit Query</Button>
+                </div>
+              </form>
+            }
+            {proMode &&  
+              <>
+              <h2>Pro Mode Interface TBD</h2>
+              </>
+            }
+            
+            <Toggle labelInternal={false} labelOne="Lite" labelTwo="Pro" checked onClick={()=>{setProMode(!proMode)}} />
 
           </AnimateHeight>
         </div>
