@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from "react";
 import AnimateHeight from "react-animate-height";
 
-const Select = ({label, subtitle, name, size, error, errorText, handleChange, children}) => {
+const Select = ({label, subtitle, value, name, size, error, errorText, handleChange, children}) => {
 
-  const [selectedItem, setSelectedItem] = useState(undefined);
+  value = (value) ? value : "";
+  const [selectedItem, setSelectedItem] = useState(value);
   const [selectOpen, setSelectOpen] = useState(false);
   const [height, setHeight] = useState(0);
   let openClass = (selectOpen) ? 'open' : 'closed';
@@ -41,7 +42,7 @@ const Select = ({label, subtitle, name, size, error, errorText, handleChange, ch
         {label && <span className="label">{label}</span>}
         {subtitle && <span className="subtitle">{subtitle}</span>}
         <div className={`select-container ${openClass}`}>
-          <select type="text" name={name} onMouseDown={handleSelectClick} value={selectedItem} defaultValue="" >
+          <select type="text" name={name} onMouseDown={handleSelectClick} defaultValue={selectedItem} >
             <option value="" disabled hidden>Select</option>
             {children}
           </select>

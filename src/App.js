@@ -31,6 +31,7 @@ function App() {
 
   }, [numQueries])
 
+
   return (
   <div className="App">
     <header className="App-header">
@@ -319,7 +320,9 @@ function App() {
           }) 
         }
         <Query newQuery handleAdd={handleAddQuery} handleRemove={handleRemoveQuery} />
-
+        {
+             
+        }
       </Tab>
     </Tabs>
     </div>

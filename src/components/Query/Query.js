@@ -11,12 +11,20 @@ import AnimateHeight from "react-animate-height";
 
 const Query = ({newQuery, handleAdd, handleRemove}) => {
 
+
+  const search = window.location.search;
+  const curieOne = new URLSearchParams(search).get('curieOne');
+  const subjectOne = new URLSearchParams(search).get('subjectOne');
+  const predicate = new URLSearchParams(search).get('predicate');
+  const curieTwo = new URLSearchParams(search).get('curieTwo');
+  const subjectTwo = new URLSearchParams(search).get('subjectTwo');
+
   const [proMode, setProMode] = useState(false);
-  const [currentPredicate, setCurrentPredicate] = useState('');
-  const [currentSubjectOne, setCurrentSubjectOne] = useState('');
-  const [currentCurieOne, setCurrentCurieOne] = useState('');
-  const [currentSubjectTwo, setCurrentSubjectTwo] = useState('');
-  const [currentCurieTwo, setCurrentCurieTwo] = useState('');
+  const [currentSubjectOne, setCurrentSubjectOne] = useState(subjectOne);
+  const [currentCurieOne, setCurrentCurieOne] = useState(curieOne);
+  const [currentPredicate, setCurrentPredicate] = useState(predicate);
+  const [currentSubjectTwo, setCurrentSubjectTwo] = useState(subjectTwo);
+  const [currentCurieTwo, setCurrentCurieTwo] = useState(curieTwo);
   const [isNewQuery, setIsNewQuery] = useState(newQuery);
   const [height, setHeight] = useState(0);
   const [queryOpen, setQueryOpen] = useState(true);
@@ -42,7 +50,7 @@ const Query = ({newQuery, handleAdd, handleRemove}) => {
   handleRemove = (handleRemove) ? handleRemove : () => {}
 
   const handleChange = (e) => {
-    console.log(e);
+    // console.log(e);
   }
 
   const handleSubmission = (e) => {
@@ -96,7 +104,7 @@ const Query = ({newQuery, handleAdd, handleRemove}) => {
 
   useEffect(() => {
     if(!newQuery) {
-      console.log(fields);
+      // console.log(fields);
     }
   }, [fields, newQuery])
 
@@ -144,6 +152,7 @@ const Query = ({newQuery, handleAdd, handleRemove}) => {
                   }}
                   error={subjectOneError}
                   errorText={subjectOneErrorText}
+                  value={currentSubjectOne}
                 >
                   <option value="Chemical" key="0">Chemical</option>
                   <option value="Subject2" key="1">Subject2</option>
@@ -159,6 +168,7 @@ const Query = ({newQuery, handleAdd, handleRemove}) => {
                   }}
                   error={curieOneError}
                   errorText={curieOneErrorText}
+                  value={currentCurieOne}
                 />
                 <Select 
                   label="Predicate" 
@@ -169,6 +179,7 @@ const Query = ({newQuery, handleAdd, handleRemove}) => {
                   }}
                   error={predicateError}
                   errorText={predicateErrorText}
+                  value={currentPredicate}
                 >
                   <option value="Predicate1" key="0">Predicate1</option>
                   <option value="Predicate2" key="1">Predicate2</option>
@@ -183,6 +194,7 @@ const Query = ({newQuery, handleAdd, handleRemove}) => {
                   }}
                   error={subjectTwoError}
                   errorText={subjectTwoErrorText}
+                  value={currentSubjectTwo}
                 >
                   <option value="Gene" key="0">Gene</option>
                   <option value="Protein" key="1">Protein</option>
@@ -198,6 +210,7 @@ const Query = ({newQuery, handleAdd, handleRemove}) => {
                   }}
                   error={curieTwoError}
                   errorText={curieTwoErrorText}
+                  value={currentCurieTwo}
                 />
                 <div className="form-footer">
                   <Button type="submit" size="m">Submit Query</Button>

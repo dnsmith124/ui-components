@@ -1,6 +1,6 @@
 import React from "react";
 
-const TextInput = ({label, subtitle, placeholder, size, rows, error, errorText, handleChange}) => {
+const TextInput = ({label, subtitle, value, placeholder, size, rows, error, errorText, handleChange}) => {
   
   size = (size === undefined) ? 's' : size;
 
@@ -14,7 +14,7 @@ const TextInput = ({label, subtitle, placeholder, size, rows, error, errorText, 
       <label className={`text-input ${size}`}> 
         {label && <span className="label">{label}</span>}
         {subtitle && <span className="subtitle">{subtitle}</span>}
-        <textarea type="text" placeholder={placeholder} rows={rows} onChange={(e) => {handleChange(e.target.value)}}/>
+        <textarea type="text" placeholder={placeholder} rows={rows} onChange={(e) => {handleChange(e.target.value)}} value={value}/>
         {error && <span className="error-text">{errorText}</span>}
       </label>
     }
@@ -23,7 +23,7 @@ const TextInput = ({label, subtitle, placeholder, size, rows, error, errorText, 
       <label className={`text-input ${size}`}> 
         {label && <span className="label">{label}</span>}
         {subtitle && <span className="subtitle">{subtitle}</span>}
-        <input type="text" placeholder={placeholder} size="1" onChange={(e) => {handleChange(e.target.value)}}/>
+        <input type="text" placeholder={placeholder} size="1" onChange={(e) => {handleChange(e.target.value)}} value={value}/>
         {error && <span className="error-text">{errorText}</span>}
       </label>
     }
